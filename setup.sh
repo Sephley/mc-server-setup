@@ -9,7 +9,7 @@ readonly GREEN='\u001b[32m' # Green
 readonly NC='\033[0m'       # Neutral (White)
 
 # Server download URLs | see https://mcversions.net/ for other versions
-readonly 1.19.4='https://piston-data.mojang.com/v1/objects/8f3112a1049751cc472ec13e397eade5336ca7ae/server.jar'
+readonly v1='https://piston-data.mojang.com/v1/objects/8f3112a1049751cc472ec13e397eade5336ca7ae/server.jar' # 1.19.4
 
 get_dependencies () {
    # install required packages
@@ -38,7 +38,7 @@ enable_port () {
 
 prepare_workspace () {
   sudo mkdir /srv/minecraft
-  sudo wget "$1.19.4" -O /srv/minecraft/server.jar
+  sudo wget "$v1" -O /srv/minecraft/server.jar
   java -Xms2048M -Xmx4096M -jar /srv/minecraft/server.jar nogui
 }
 
