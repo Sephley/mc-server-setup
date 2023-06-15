@@ -45,7 +45,7 @@ prepare_workspace () {
 enable_eula () {
    rm /srv/minecraft/eula.txt
    touch /srv/minecraft/eula.txt
-   echo "eula=true" > /srv/minecraft/eula.txt
+   sed -i 's/echo=false/echo=true/' /srv/minecraft/eula.txt
 }
 
 main () {
