@@ -10,6 +10,7 @@ readonly NC='\033[0m'       # Neutral (White)
 
 # Server download URLs | see https://mcversions.net/ for other versions
 readonly v1='https://piston-data.mojang.com/v1/objects/8f3112a1049751cc472ec13e397eade5336ca7ae/server.jar' # 1.19.4
+readonly v2='https://piston-data.mojang.com/v1/objects/84194a2f286ef7c14ed7ce0090dba59902951553/server.jar' # 1.20.1
 
 get_dependencies () {
    # install required packages
@@ -18,10 +19,10 @@ get_dependencies () {
         apt update
         apt -y install openjdk-17-jre-headless
         apt -y install screen
-   elif [-f /etc/yum.conf ]; then
+   elif [ -f /etc/yum.conf ]; then
         yum -y install openjdk-17-jre-headless
         yum -y install screen
-   elif [-f /etc/pacman.conf ]; then
+   elif [ -f /etc/pacman.conf ]; then
         pacman -Sy
         pacman -S --noconfirm pacman
         pacman -S --noconfirm openjdk-17-jre-headless
