@@ -12,6 +12,14 @@ readonly NC='\033[0m'       # Neutral (White)
 readonly v1='https://piston-data.mojang.com/v1/objects/8f3112a1049751cc472ec13e397eade5336ca7ae/server.jar' # 1.19.4
 readonly v2='https://piston-data.mojang.com/v1/objects/84194a2f286ef7c14ed7ce0090dba59902951553/server.jar' # 1.20.1
 
+check_args () {
+   # Check the number of arguments passed to the script
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <arg>"
+    exit 1
+fi
+}
+
 get_dependencies () {
    # install required packages
    echo -e "${GREEN}\ndownloading required packages...${NC}"
@@ -38,9 +46,15 @@ enable_port () {
 }
 
 prepare_workspace () {
-  sudo mkdir /srv/minecraft
-  sudo wget "$v1" -O /srv/minecraft/server.jar
-  java -Xms2048M -Xmx4096M -jar /srv/minecraft/server.jar nogui
+   if [ $1 == "1.19.4" ]; then
+      sudo mkdir /srv/minecraft
+      sudo wget "$v1" -O /srv/minecraft/server.jar
+      java -Xms2048M -Xmx4096M -jar /srv/minecraft/server.jar nogui
+   elif [ $1 == "1.20.1" ]; then
+      sudo mkdir /srv/minecraft
+      sudo wget "$v2" -O /srv/minecraft/server.jar
+      java -Xms2048M -Xmx4096M -jar /srv/minecraft/server.jar nogui
+   fi
 }
 
 enable_eula () {
@@ -50,6 +64,7 @@ enable_eula () {
 }
 
 main () {
+   check_args
    get_dependencies
    enable_port
    prepare_workspace
